@@ -2,15 +2,17 @@ package com.kyanite.deeperdarker.registry.blocks.custom;
 
 import com.kyanite.deeperdarker.registry.entities.DDEntities;
 import com.kyanite.deeperdarker.registry.entities.custom.SculkWormEntity;
+import eu.pb4.polymer.api.block.PolymerBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SculkBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class InfestedSculkBlock extends SculkBlock {
+public class InfestedSculkBlock extends SculkBlock implements PolymerBlock {
     public InfestedSculkBlock(Properties pProperties) {
         super(pProperties);
     }
@@ -27,5 +29,10 @@ public class InfestedSculkBlock extends SculkBlock {
         }
 
         super.stepOn(pLevel, pPos, pState, pEntity);
+    }
+
+    @Override
+    public Block getPolymerBlock(BlockState state) {
+        return Blocks.SCULK;
     }
 }

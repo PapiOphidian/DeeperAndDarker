@@ -9,6 +9,7 @@ import com.kyanite.deeperdarker.registry.entities.custom.ai.GoToDisturbanceGoal;
 import com.kyanite.deeperdarker.registry.entities.custom.ai.IDisturbanceListener;
 import com.kyanite.deeperdarker.registry.sounds.DDSounds;
 import com.mojang.serialization.Dynamic;
+import eu.pb4.polymer.api.entity.PolymerEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtOps;
@@ -47,7 +48,7 @@ import software.bernie.geckolib3.util.GeckoLibUtil;
 import java.util.List;
 import java.util.function.BiConsumer;
 
-public class ShatteredEntity extends ActionAnimatedEntity implements IAnimatable, VibrationListener.VibrationListenerConfig, IDisturbanceListener {
+public class ShatteredEntity extends ActionAnimatedEntity implements IAnimatable, VibrationListener.VibrationListenerConfig, IDisturbanceListener, PolymerEntity {
     public static EntityState IDLE = new EntityState(true, new EntityAnimationHolder("animation.shattered.idle", DDUtils.secondsToTicks(3), true, false));
     public static EntityState WALK = new EntityState(true, new EntityAnimationHolder("animation.shattered.walk", DDUtils.secondsToTicks(1.5f), true, false));
     public static EntityState ATTACK = new EntityState(true, new EntityAnimationHolder("animation.shattered.attack", DDUtils.secondsToTicks(0.5f), false, true));
@@ -277,5 +278,10 @@ public class ShatteredEntity extends ActionAnimatedEntity implements IAnimatable
     @Override
     public void setDisturbanceLocation(BlockPos disturbanceLocation) {
         this.disturbanceLocation = disturbanceLocation;
+    }
+
+    @Override
+    public EntityType<?> getPolymerEntityType() {
+        return EntityType.WARDEN;
     }
 }

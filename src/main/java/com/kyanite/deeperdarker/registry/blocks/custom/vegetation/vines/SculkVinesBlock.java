@@ -1,16 +1,18 @@
 package com.kyanite.deeperdarker.registry.blocks.custom.vegetation.vines;
 
 import com.kyanite.deeperdarker.registry.blocks.DDBlocks;
+import eu.pb4.polymer.api.block.PolymerBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.GrowingPlantHeadBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class SculkVinesBlock extends GrowingPlantHeadBlock {
+public class SculkVinesBlock extends GrowingPlantHeadBlock implements PolymerBlock {
     protected static final VoxelShape SHAPE = Block.box(4.0D, 9.0D, 4.0D, 12.0D, 16.0D, 12.0D);
 
     public SculkVinesBlock(Properties pProperties) {
@@ -35,5 +37,10 @@ public class SculkVinesBlock extends GrowingPlantHeadBlock {
     @Override
     public boolean isValidBonemealTarget(BlockGetter pLevel, BlockPos pPos, BlockState pState, boolean pIsClient) {
         return false;
+    }
+
+    @Override
+    public Block getPolymerBlock(BlockState state) {
+        return Blocks.VINE;
     }
 }

@@ -2,6 +2,7 @@ package com.kyanite.deeperdarker.registry.entities.custom.projectiles;
 
 import com.kyanite.deeperdarker.config.DDConfig;
 import com.kyanite.deeperdarker.registry.entities.DDEntities;
+import eu.pb4.polymer.api.entity.PolymerEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.core.BlockPos;
@@ -28,7 +29,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import java.util.Iterator;
 
-public class ShriekProjectile extends AbstractArrow {
+public class ShriekProjectile extends AbstractArrow implements PolymerEntity {
     private final SculkSpreader sculkSpreader;
 
     public ShriekProjectile(EntityType<? extends ShriekProjectile> entityType, Level level) {
@@ -226,5 +227,10 @@ public class ShriekProjectile extends AbstractArrow {
     @Environment(EnvType.CLIENT)
     public boolean shouldRenderAtSqrDistance(double distance) {
         return true;
+    }
+
+    @Override
+    public EntityType<?> getPolymerEntityType() {
+        return EntityType.ARROW;
     }
 }

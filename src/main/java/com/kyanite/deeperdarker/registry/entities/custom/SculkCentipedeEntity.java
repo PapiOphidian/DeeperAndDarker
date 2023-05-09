@@ -4,6 +4,7 @@ import com.kyanite.deeperdarker.miscellaneous.DDTypes;
 import com.kyanite.deeperdarker.registry.entities.custom.ai.SculkLeechMelee;
 import com.kyanite.deeperdarker.registry.entities.custom.ai.nav.BetterWallClimberNavigation;
 import com.kyanite.deeperdarker.registry.sounds.DDSounds;
+import eu.pb4.polymer.api.entity.PolymerEntity;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -33,7 +34,7 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 import software.bernie.geckolib3.util.GeckoLibUtil;
 
-public class SculkCentipedeEntity extends Monster implements IAnimatable {
+public class SculkCentipedeEntity extends Monster implements IAnimatable, PolymerEntity {
     private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
     private static final EntityDataAccessor<Byte> DATA_FLAGS_ID = SynchedEntityData.defineId(SculkCentipedeEntity.class, EntityDataSerializers.BYTE);
 
@@ -140,5 +141,10 @@ public class SculkCentipedeEntity extends Monster implements IAnimatable {
     @Override
     public AnimationFactory getFactory() {
         return this.factory;
+    }
+
+    @Override
+    public EntityType<?> getPolymerEntityType() {
+        return EntityType.SILVERFISH;
     }
 }

@@ -1,5 +1,6 @@
 package com.kyanite.deeperdarker.registry.blocks.custom;
 
+import eu.pb4.polymer.api.block.PolymerBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
@@ -12,10 +13,11 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
-public class GeyserBlock extends Block {
+public class GeyserBlock extends Block implements PolymerBlock {
     public GeyserBlock(Properties pProperties) {
         super(pProperties);
     }
@@ -50,5 +52,10 @@ public class GeyserBlock extends Block {
             pEntity.level.playLocalSound((double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, SoundEvents.LAVA_POP, SoundSource.BLOCKS, 2 + pEntity.level.random.nextFloat(), pEntity.level.random.nextFloat() * 0.7F + 0.6F, false);
             pEntity.level.addParticle(ParticleTypes.LARGE_SMOKE, pos.getX(), pos.getY(), pos.getZ(), 0.05d, 0.5d, 0.05d);
         }
+    }
+
+    @Override
+    public Block getPolymerBlock(BlockState state) {
+        return Blocks.NETHER_WART_BLOCK;
     }
 }

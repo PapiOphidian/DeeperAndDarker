@@ -2,6 +2,10 @@ package com.kyanite.deeperdarker.registry.items.custom;
 
 import com.kyanite.deeperdarker.registry.entities.custom.DDBoat;
 import com.kyanite.deeperdarker.registry.entities.custom.DDChestBoat;
+import eu.pb4.polymer.api.item.PolymerItem;
+import eu.pb4.polymer.api.item.PolymerItemUtils;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -9,18 +13,21 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BoatItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.function.Predicate;
 
-public class DDBoatItem extends BoatItem {
+public class DDBoatItem extends BoatItem implements PolymerItem {
     private static final Predicate<Entity> ENTITY_PREDICATE = EntitySelector.NO_SPECTATORS.and(Entity::isPickable);
     private final DDBoat.Type type;
     private final boolean hasChest;
@@ -77,5 +84,23 @@ public class DDBoatItem extends BoatItem {
 
     private DDBoat getBoat(Level level, HitResult hitResult) {
         return this.hasChest ? DDChestBoat.create(level, hitResult.getLocation().x, hitResult.getLocation().y, hitResult.getLocation().z) : DDBoat.create(level, hitResult.getLocation().x, hitResult.getLocation().y, hitResult.getLocation().z);
+    }
+
+    @Override
+    public Item getPolymerItem(ItemStack itemStack, @Nullable ServerPlayer player) {
+        return Items.BIRCH_BOAT;
+    }
+
+    @Override
+    public ItemStack getPolymerItemStack(ItemStack itemStack, @Nullable ServerPlayer player) {
+        ItemStack out = PolymerItemUtils.createItemStack(itemStack, player);
+        CompoundTag compound = new CompoundTag();
+        CompoundTag display = new CompoundTag();
+
+        display.putString("Name", "{\"text\":\"Echo Boat\",\"italic\":false}");
+        compound.put("display", display);
+        out.setTag(compound);
+
+        return out;
     }
 }

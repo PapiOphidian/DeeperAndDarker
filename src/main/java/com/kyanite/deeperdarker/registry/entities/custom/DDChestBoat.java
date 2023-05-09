@@ -1,6 +1,7 @@
 package com.kyanite.deeperdarker.registry.entities.custom;
 
 import com.kyanite.deeperdarker.registry.entities.DDEntities;
+import eu.pb4.polymer.api.entity.PolymerEntity;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
@@ -25,7 +26,7 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
-public class DDChestBoat extends DDBoat implements HasCustomInventoryScreen, ContainerEntity {
+public class DDChestBoat extends DDBoat implements HasCustomInventoryScreen, ContainerEntity, PolymerEntity {
     private static final int CONTAINER_SIZE = 27;
     private NonNullList<ItemStack> itemStacks = NonNullList.withSize(CONTAINER_SIZE, ItemStack.EMPTY);
     @Nullable
@@ -44,6 +45,11 @@ public class DDChestBoat extends DDBoat implements HasCustomInventoryScreen, Con
         boat.yo = y;
         boat.zo = z;
         return boat;
+    }
+
+    @Override
+    public EntityType<?> getPolymerEntityType() {
+        return EntityType.CHEST_BOAT;
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.kyanite.deeperdarker.registry.entities.custom;
 
 import com.kyanite.deeperdarker.registry.entities.DDEntities;
 import com.kyanite.deeperdarker.registry.items.DDItems;
+import eu.pb4.polymer.api.entity.PolymerEntity;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
@@ -16,7 +17,7 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.function.Supplier;
 
-public class DDBoat extends Boat {
+public class DDBoat extends Boat implements PolymerEntity {
     private static final EntityDataAccessor<Integer> WOOD_TYPE = SynchedEntityData.defineId(DDBoat.class, EntityDataSerializers.INT);
 
     public DDBoat(EntityType<? extends Boat> entityType, Level worldIn) {
@@ -69,6 +70,11 @@ public class DDBoat extends Boat {
     @Override
     public Packet<?> getAddEntityPacket() {
         return new ClientboundAddEntityPacket(this);
+    }
+
+    @Override
+    public EntityType<?> getPolymerEntityType() {
+        return EntityType.BOAT;
     }
 
     public enum Type {

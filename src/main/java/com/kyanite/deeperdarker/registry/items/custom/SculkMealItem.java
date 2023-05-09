@@ -1,22 +1,28 @@
 package com.kyanite.deeperdarker.registry.items.custom;
 
 import com.kyanite.deeperdarker.registry.sounds.DDSounds;
+import eu.pb4.polymer.api.item.PolymerItem;
+import eu.pb4.polymer.api.item.PolymerItemUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction.Axis;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
 
-public class SculkMealItem extends Item {
+public class SculkMealItem extends Item implements PolymerItem {
 
     public SculkMealItem(Item.Properties properties) {
         super(properties);
@@ -117,5 +123,23 @@ public class SculkMealItem extends Item {
             }
 
         }
+    }
+
+    @Override
+    public Item getPolymerItem(ItemStack itemStack, @Nullable ServerPlayer player) {
+        return Items.BONE_MEAL;
+    }
+
+    @Override
+    public ItemStack getPolymerItemStack(ItemStack itemStack, @Nullable ServerPlayer player) {
+        ItemStack out = PolymerItemUtils.createItemStack(itemStack, player);
+        CompoundTag compound = new CompoundTag();
+        CompoundTag display = new CompoundTag();
+
+        display.putString("Name", "{\"text\":\"Sculk Meal\",\"italic\":false}");
+        compound.put("display", display);
+        out.setTag(compound);
+
+        return out;
     }
 }

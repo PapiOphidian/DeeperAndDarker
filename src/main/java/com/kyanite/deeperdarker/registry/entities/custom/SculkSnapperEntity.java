@@ -6,6 +6,7 @@ import com.kyanite.deeperdarker.miscellaneous.DDUtils;
 import com.kyanite.deeperdarker.registry.entities.custom.ai.CustomAttackAnimMelee;
 import com.kyanite.deeperdarker.registry.particle.DDParticleUtils;
 import com.kyanite.deeperdarker.registry.sounds.DDSounds;
+import eu.pb4.polymer.api.entity.PolymerEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
@@ -49,7 +50,7 @@ import software.bernie.geckolib3.util.GeckoLibUtil;
 import java.util.Arrays;
 import java.util.List;
 
-public class SculkSnapperEntity extends ActionAnimatedEntity implements IAnimatable {
+public class SculkSnapperEntity extends ActionAnimatedEntity implements IAnimatable, PolymerEntity {
     private static final EntityDataAccessor<Integer> SNIFF_COUNTER = SynchedEntityData.defineId(SculkSnapperEntity.class, EntityDataSerializers.INT);
     public static EntityState IDLE = new EntityState(true, new EntityAnimationHolder("idle", DDUtils.secondsToTicks(4), true, false));
     public static EntityState MOUTH_OPEN = new EntityState(true, new EntityAnimationHolder("openmouth", DDUtils.secondsToTicks(0.5f), false, true));
@@ -323,5 +324,10 @@ public class SculkSnapperEntity extends ActionAnimatedEntity implements IAnimata
             return !pStack.getEnchantmentTags().isEmpty();
         }
         return false;
+    }
+
+    @Override
+    public EntityType<?> getPolymerEntityType() {
+        return EntityType.HOGLIN;
     }
 }

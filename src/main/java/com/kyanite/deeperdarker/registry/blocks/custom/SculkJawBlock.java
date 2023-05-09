@@ -4,6 +4,7 @@ import com.kyanite.deeperdarker.config.DDConfig;
 import com.kyanite.deeperdarker.miscellaneous.DDTypes;
 import com.kyanite.deeperdarker.registry.blocks.DDBlocks;
 import com.kyanite.deeperdarker.registry.sounds.DDSounds;
+import eu.pb4.polymer.api.block.PolymerBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
@@ -16,6 +17,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
@@ -23,7 +25,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.ticks.TickPriority;
 
-public class SculkJawBlock extends Block {
+public class SculkJawBlock extends Block implements PolymerBlock {
     public static final BooleanProperty ACTIVATED = BooleanProperty.create("activated");
     public DamageSource damageSource = new DamageSource("jaw");
 
@@ -87,5 +89,10 @@ public class SculkJawBlock extends Block {
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
         pBuilder.add(ACTIVATED);
+    }
+
+    @Override
+    public Block getPolymerBlock(BlockState state) {
+        return Blocks.SCULK;
     }
 }

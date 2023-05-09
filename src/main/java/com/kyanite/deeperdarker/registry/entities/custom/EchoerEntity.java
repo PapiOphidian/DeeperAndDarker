@@ -2,6 +2,7 @@ package com.kyanite.deeperdarker.registry.entities.custom;
 
 import com.kyanite.deeperdarker.miscellaneous.DDTypes;
 import com.kyanite.deeperdarker.registry.enchantments.DDEnchantments;
+import eu.pb4.polymer.api.entity.PolymerEntity;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
@@ -43,7 +44,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class EchoerEntity extends AbstractVillager implements IAnimatable {
+public class EchoerEntity extends AbstractVillager implements IAnimatable, PolymerEntity {
     private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
     public final MerchantOffer[] offers = new MerchantOffer[]{
             new MerchantOffer(
@@ -150,5 +151,10 @@ public class EchoerEntity extends AbstractVillager implements IAnimatable {
     @Override
     public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
         return null;
+    }
+
+    @Override
+    public EntityType<?> getPolymerEntityType() {
+        return EntityType.VILLAGER;
     }
 }

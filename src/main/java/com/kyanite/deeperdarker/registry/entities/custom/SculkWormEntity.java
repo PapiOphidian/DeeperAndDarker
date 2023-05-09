@@ -7,6 +7,7 @@ import com.kyanite.deeperdarker.registry.blocks.DDBlocks;
 import com.kyanite.deeperdarker.registry.entities.custom.ai.CustomAttackAnimMelee;
 import com.kyanite.deeperdarker.registry.particle.DDParticleUtils;
 import com.kyanite.deeperdarker.registry.sounds.DDSounds;
+import eu.pb4.polymer.api.entity.PolymerEntity;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -32,7 +33,7 @@ import software.bernie.geckolib3.util.GeckoLibUtil;
 import java.util.Arrays;
 import java.util.List;
 
-public class SculkWormEntity extends ActionAnimatedEntity implements IAnimatable {
+public class SculkWormEntity extends ActionAnimatedEntity implements IAnimatable, PolymerEntity {
     private static final EntityDataAccessor<Integer> DESCEND_COUNTDOWN = SynchedEntityData.defineId(SculkWormEntity.class, EntityDataSerializers.INT);
     public static EntityState AWAKE = new EntityState(true, new EntityAnimationHolder("idle", DDUtils.secondsToTicks(4), true, false));
     public static EntityState EMERGE = new EntityState(true, new EntityAnimationHolder("emerge", DDUtils.secondsToTicks(4), false, true));
@@ -188,5 +189,10 @@ public class SculkWormEntity extends ActionAnimatedEntity implements IAnimatable
     @Override
     protected SoundEvent getHurtSound(DamageSource pDamageSource) {
         return DDSounds.SHRIEK_WORM_HURT.get();
+    }
+
+    @Override
+    public EntityType<?> getPolymerEntityType() {
+        return EntityType.DROWNED;
     }
 }

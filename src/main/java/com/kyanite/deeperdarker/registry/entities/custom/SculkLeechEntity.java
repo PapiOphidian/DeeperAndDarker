@@ -3,6 +3,7 @@ package com.kyanite.deeperdarker.registry.entities.custom;
 import com.kyanite.deeperdarker.miscellaneous.DDTypes;
 import com.kyanite.deeperdarker.registry.entities.custom.ai.SculkLeechMelee;
 import com.kyanite.deeperdarker.registry.sounds.DDSounds;
+import eu.pb4.polymer.api.entity.PolymerEntity;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
@@ -29,7 +30,7 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 import software.bernie.geckolib3.util.GeckoLibUtil;
 
-public class SculkLeechEntity extends Monster implements IAnimatable {
+public class SculkLeechEntity extends Monster implements IAnimatable, PolymerEntity {
     private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
 
     public SculkLeechEntity(EntityType<? extends Monster> pEntityType, Level pLevel) {
@@ -103,5 +104,10 @@ public class SculkLeechEntity extends Monster implements IAnimatable {
     @Override
     public AnimationFactory getFactory() {
         return this.factory;
+    }
+
+    @Override
+    public EntityType<?> getPolymerEntityType() {
+        return EntityType.ENDERMITE;
     }
 }

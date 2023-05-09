@@ -3,6 +3,7 @@ package com.kyanite.deeperdarker.registry.blocks.custom;
 import com.kyanite.deeperdarker.registry.entities.DDEntities;
 import com.kyanite.deeperdarker.registry.entities.custom.SculkLeechEntity;
 import com.kyanite.deeperdarker.registry.entities.custom.StalkerEntity;
+import eu.pb4.polymer.api.block.PolymerBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.ConstantInt;
@@ -11,6 +12,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DropExperienceBlock;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -26,7 +28,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import java.util.stream.Stream;
 
-public class AncientVaseBlock extends DropExperienceBlock implements SimpleWaterloggedBlock {
+public class AncientVaseBlock extends DropExperienceBlock implements SimpleWaterloggedBlock, PolymerBlock {
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public final RandomSource randomSource = RandomSource.create();
 
@@ -72,5 +74,10 @@ public class AncientVaseBlock extends DropExperienceBlock implements SimpleWater
                 if(!pLevel.getBlockState(pPos.below()).isAir() && !pLevel.getBlockState(pPos.below().below()).isAir()) StalkerEntity.emergeFromVase(pPos, pLevel);
             }
         }
+    }
+
+    @Override
+    public Block getPolymerBlock(BlockState state) {
+        return Blocks.FLOWER_POT;
     }
 }

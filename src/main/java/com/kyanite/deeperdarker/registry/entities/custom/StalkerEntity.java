@@ -10,6 +10,7 @@ import com.kyanite.deeperdarker.registry.entities.custom.ai.IDisturbanceListener
 import com.kyanite.deeperdarker.registry.particle.DDParticleUtils;
 import com.kyanite.deeperdarker.registry.sounds.DDSounds;
 import com.mojang.serialization.Dynamic;
+import eu.pb4.polymer.api.entity.PolymerEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtOps;
@@ -58,7 +59,7 @@ import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Predicate;
 
-public class StalkerEntity extends ActionAnimatedEntity implements IAnimatable, VibrationListener.VibrationListenerConfig, IDisturbanceListener {
+public class StalkerEntity extends ActionAnimatedEntity implements IAnimatable, VibrationListener.VibrationListenerConfig, IDisturbanceListener, PolymerEntity {
     private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
 
     private static final EntityDataAccessor<Integer> RING_COOLDOWN = SynchedEntityData.defineId(StalkerEntity.class, EntityDataSerializers.INT);
@@ -419,5 +420,10 @@ public class StalkerEntity extends ActionAnimatedEntity implements IAnimatable, 
     @Override
     public void setDisturbanceLocation(BlockPos disturbanceLocation) {
         this.disturbanceLocation = disturbanceLocation;
+    }
+
+    @Override
+    public EntityType<?> getPolymerEntityType() {
+        return EntityType.WARDEN;
     }
 }

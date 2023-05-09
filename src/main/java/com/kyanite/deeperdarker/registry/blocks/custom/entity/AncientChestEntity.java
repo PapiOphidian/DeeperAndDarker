@@ -1,7 +1,7 @@
 package com.kyanite.deeperdarker.registry.blocks.custom.entity;
 
 import com.kyanite.deeperdarker.registry.blocks.custom.AncientChestBlock;
-import eu.pb4.polymer.api.item.PolymerItem;
+import eu.pb4.polymer.api.block.PolymerBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.particles.BlockParticleOption;
@@ -16,7 +16,9 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ChestMenu;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -33,7 +35,7 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 import software.bernie.geckolib3.util.GeckoLibUtil;
 
-public class AncientChestEntity extends RandomizableContainerBlockEntity implements IAnimatable, PolymerItem {
+public class AncientChestEntity extends RandomizableContainerBlockEntity implements IAnimatable, PolymerBlock {
     private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
     public AncientChestBlock ancientChestBlock;
     private NonNullList<ItemStack> items;
@@ -174,7 +176,7 @@ public class AncientChestEntity extends RandomizableContainerBlockEntity impleme
     }
 
     @Override
-    public Item getPolymerItem(ItemStack itemStack, @Nullable ServerPlayer player) {
-        return null;
+    public Block getPolymerBlock(BlockState state) {
+        return Blocks.CHEST;
     }
 }

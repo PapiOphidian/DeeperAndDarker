@@ -1,6 +1,7 @@
 package com.kyanite.deeperdarker.registry.enchantments;
 
 import com.kyanite.deeperdarker.DeeperAndDarker;
+import eu.pb4.polymer.api.other.PolymerEnchantment;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -17,7 +18,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SculkCatalystBlock;
 import net.minecraft.world.level.block.SculkSpreader;
 
-public class CatalysisEnchant extends Enchantment {
+public class CatalysisEnchant extends Enchantment implements PolymerEnchantment {
     protected CatalysisEnchant(Rarity rarity, EnchantmentCategory enchantmentCategory, EquipmentSlot[] equipmentSlots) {
         super(rarity, enchantmentCategory, equipmentSlots);
     }
