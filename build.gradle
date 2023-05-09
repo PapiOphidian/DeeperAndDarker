@@ -1,91 +1,72 @@
-import java.text.SimpleDateFormat
-
 plugins {
-    id "architectury-plugin" version "3.4-SNAPSHOT"
-    id "dev.architectury.loom" version "0.12.0-SNAPSHOT" apply false
-    id "me.shedaniel.unified-publishing" version "0.1.+" apply false
+    id 'fabric-loom' version '1.2-SNAPSHOT'
+    id 'maven-publish'
 }
 
-architectury {
-    minecraft = rootProject.minecraft_version
-}
-
-subprojects {
-    apply plugin: "dev.architectury.loom"
-
-    loom {
-        silentMojangMappingsLicense()
+repositories {
+    maven { url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
+    maven { url = "https://maven.kyrptonaught.dev" }
+    maven { url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/" }
+    maven {
+        name = "Modrinth"
+        url = "https://api.modrinth.com/maven"
+        content {
+            includeGroup "maven.modrinth"
+        }
     }
+    maven { url 'https://maven.nucleoid.xyz/' }
+}
 
-    dependencies {
-        minecraft "com.mojang:minecraft:${rootProject.minecraft_version}"
-        mappings loom.officialMojangMappings()
+dependencies {
+    // To change the versions see the gradle.properties file
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    mappings loom.officialMojangMappings()
+    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+    modImplementation("software.bernie.geckolib:geckolib-fabric-1.19:3.1.37"){
+        exclude(module: "jankson")
+    }
+    modImplementation("maven.modrinth:paragon:fabric-3.0.2-1.19x")
+    include modImplementation('net.kyrptonaught:customportalapi:0.0.1-beta54-1.19')
+    runtimeOnly 'blue.endless:jankson:1.1.2'
+    modImplementation include("eu.pb4:polymer:0.2.26+1.19.2")
+}
+
+base {
+    archivesName = project.archives_base_name
+}
+
+processResources {
+    inputs.property "version", project.version
+
+    filesMatching("fabric.mod.json") {
+        expand "version": project.version
     }
 }
 
-allprojects {
-    apply plugin: "java"
-    apply plugin: "architectury-plugin"
-    apply plugin: "maven-publish"
-    apply plugin: "me.shedaniel.unified-publishing"
+tasks.withType(JavaCompile).configureEach {
+    it.options.release = 17
+}
 
-    archivesBaseName = rootProject.archives_base_name + "-" + project.name
-    version = rootProject.mod_version
-    group = rootProject.maven_group
+java {
+    withSourcesJar()
 
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+jar {
+    from("LICENSE") {
+        rename { "${it}_${base.archivesName.get()}"}
+    }
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
     repositories {
-        maven { url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
-        maven { url = "https://maven.kyrptonaught.dev" }
-        maven { url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/" }
-        maven {
-            name = "Modrinth"
-            url = "https://api.modrinth.com/maven"
-            content {
-                includeGroup "maven.modrinth"
-            }
-        }
-    }
-
-    processResources {
-        duplicatesStrategy(DuplicatesStrategy.EXCLUDE)
-    }
-
-    tasks.withType(JavaCompile) {
-        options.encoding = "UTF-8"
-        options.release = 17
-    }
-
-    ext {
-        releaseChangelog = {
-            def dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm")
-            dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"))
-            def branch
-            if(System.env.BRANCH_NAME) {
-                branch = System.env.BRANCH_NAME
-                branch = branch.substring(branch.lastIndexOf("/") + 1)
-            } else {
-                branch = "git rev-parse --abbrev-ref HEAD".execute().in.text.trim()
-            }
-            if(branch == "HEAD") {
-                branch = "git rev-parse --short HEAD".execute().in.text.trim()
-            }
-            def time = dateFormat.format(new Date())
-            def changes = new StringBuilder()
-            changes << "## Deeper and Darker v${rootProject.mod_version} for ${rootProject.minecraft_version}\nUpdated at **$time**."
-            def proc = "git log --max-count=200 --pretty=format:%s".execute()
-            proc.in.eachLine { line ->
-                def processedLine = line.toString()
-                if(!processedLine.contains("New translations") && !processedLine.contains("Merge") && !processedLine.contains("branch")) {
-                    changes << "\n- ${processedLine.capitalize()}"
-                }
-            }
-            proc.waitFor()
-            return changes.toString()
-        }
-    }
-
-
-    java {
-        withSourcesJar()
     }
 }
