@@ -1,7 +1,7 @@
 package com.kyanite.deeperdarker.registry.blocks.custom.vegetation.tendrils;
 
 import com.kyanite.deeperdarker.registry.blocks.DDBlocks;
-import eu.pb4.polymer.api.block.PolymerBlock;
+import com.kyanite.deeperdarker.registry.blocks.extentions.IFakeableBlock;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.Block;
@@ -10,7 +10,7 @@ import net.minecraft.world.level.block.GrowingPlantHeadBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class SculkTendrilsBlock extends GrowingPlantHeadBlock implements PolymerBlock {
+public class SculkTendrilsBlock extends GrowingPlantHeadBlock implements IFakeableBlock {
     public static final VoxelShape SHAPE = Block.box(4, 0, 4, 12, 15, 12);
 
     public SculkTendrilsBlock(Properties properties) {
@@ -37,8 +37,9 @@ public class SculkTendrilsBlock extends GrowingPlantHeadBlock implements Polymer
         return pState.isAir();
     }
 
+    public Block fake = Blocks.KELP;
     @Override
     public Block getPolymerBlock(BlockState state) {
-        return Blocks.KELP;
+        return fake;
     }
 }

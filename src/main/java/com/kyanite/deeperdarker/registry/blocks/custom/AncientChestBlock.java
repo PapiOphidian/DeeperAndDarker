@@ -2,8 +2,8 @@ package com.kyanite.deeperdarker.registry.blocks.custom;
 
 import com.kyanite.deeperdarker.DeeperAndDarker;
 import com.kyanite.deeperdarker.registry.blocks.custom.entity.AncientChestEntity;
+import com.kyanite.deeperdarker.registry.blocks.extentions.IFakeableBlock;
 import com.kyanite.deeperdarker.registry.sounds.DDSounds;
-import eu.pb4.polymer.api.block.PolymerBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
@@ -37,7 +37,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.stream.Stream;
 
-public class AncientChestBlock extends DirectionalBlock implements SimpleWaterloggedBlock, EntityBlock, PolymerBlock {
+public class AncientChestBlock extends DirectionalBlock implements SimpleWaterloggedBlock, EntityBlock, IFakeableBlock {
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final BooleanProperty POLISHED = BooleanProperty.create("polished");
 
@@ -191,8 +191,9 @@ public class AncientChestBlock extends DirectionalBlock implements SimpleWaterlo
         return RenderShape.ENTITYBLOCK_ANIMATED;
     }
 
+    public Block fake = Blocks.CHEST;
     @Override
     public Block getPolymerBlock(BlockState state) {
-        return Blocks.CHEST;
+        return fake;
     }
 }

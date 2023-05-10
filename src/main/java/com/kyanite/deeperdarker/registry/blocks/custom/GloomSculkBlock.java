@@ -1,7 +1,7 @@
 package com.kyanite.deeperdarker.registry.blocks.custom;
 
+import com.kyanite.deeperdarker.registry.blocks.extentions.IFakeableBlock;
 import com.kyanite.deeperdarker.registry.world.features.DDConfiguredFeatures;
-import eu.pb4.polymer.api.block.PolymerBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -10,7 +10,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class GloomSculkBlock extends SculkBlock implements BonemealableBlock, SculkBehaviour, PolymerBlock {
+public class GloomSculkBlock extends SculkBlock implements BonemealableBlock, SculkBehaviour, IFakeableBlock {
     public GloomSculkBlock(Properties pProperties) {
         super(pProperties);
     }
@@ -30,8 +30,9 @@ public class GloomSculkBlock extends SculkBlock implements BonemealableBlock, Sc
         DDConfiguredFeatures.GLOOM_SCULK_VEGETATION_COLLECTION.get().place(pLevel, pLevel.getChunkSource().getGenerator(), pRandom, pPos.above());
     }
 
+    public Block fake = Blocks.NETHERRACK;
     @Override
     public Block getPolymerBlock(BlockState state) {
-        return Blocks.NETHERRACK;
+        return fake;
     }
 }

@@ -1,6 +1,6 @@
 package com.kyanite.deeperdarker.registry.blocks.custom;
 
-import eu.pb4.polymer.api.block.PolymerBlock;
+import com.kyanite.deeperdarker.registry.blocks.extentions.IFakeableBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
@@ -17,7 +17,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
-public class GeyserBlock extends Block implements PolymerBlock {
+public class GeyserBlock extends Block implements IFakeableBlock {
     public GeyserBlock(Properties pProperties) {
         super(pProperties);
     }
@@ -54,8 +54,9 @@ public class GeyserBlock extends Block implements PolymerBlock {
         }
     }
 
+    public Block fake = Blocks.NETHER_WART_BLOCK;
     @Override
     public Block getPolymerBlock(BlockState state) {
-        return Blocks.NETHER_WART_BLOCK;
+        return fake;
     }
 }

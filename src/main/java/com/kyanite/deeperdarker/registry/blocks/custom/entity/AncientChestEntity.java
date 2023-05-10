@@ -1,22 +1,19 @@
 package com.kyanite.deeperdarker.registry.blocks.custom.entity;
 
 import com.kyanite.deeperdarker.registry.blocks.custom.AncientChestBlock;
-import eu.pb4.polymer.api.block.PolymerBlock;
+import com.kyanite.deeperdarker.registry.blocks.extentions.IFakeableBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ChestMenu;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -24,7 +21,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -35,7 +31,7 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 import software.bernie.geckolib3.util.GeckoLibUtil;
 
-public class AncientChestEntity extends RandomizableContainerBlockEntity implements IAnimatable, PolymerBlock {
+public class AncientChestEntity extends RandomizableContainerBlockEntity implements IAnimatable, IFakeableBlock {
     private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
     public AncientChestBlock ancientChestBlock;
     private NonNullList<ItemStack> items;
@@ -175,8 +171,9 @@ public class AncientChestEntity extends RandomizableContainerBlockEntity impleme
         this.items = nonNullList;
     }
 
+    public Block fake = Blocks.CHEST;
     @Override
     public Block getPolymerBlock(BlockState state) {
-        return Blocks.CHEST;
+        return fake;
     }
 }

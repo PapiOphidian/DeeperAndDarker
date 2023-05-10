@@ -3,8 +3,8 @@ package com.kyanite.deeperdarker.registry.blocks.custom;
 import com.kyanite.deeperdarker.config.DDConfig;
 import com.kyanite.deeperdarker.miscellaneous.DDTypes;
 import com.kyanite.deeperdarker.registry.blocks.DDBlocks;
+import com.kyanite.deeperdarker.registry.blocks.extentions.IFakeableBlock;
 import com.kyanite.deeperdarker.registry.sounds.DDSounds;
-import eu.pb4.polymer.api.block.PolymerBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
@@ -25,7 +25,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.ticks.TickPriority;
 
-public class SculkJawBlock extends Block implements PolymerBlock {
+public class SculkJawBlock extends Block implements IFakeableBlock {
     public static final BooleanProperty ACTIVATED = BooleanProperty.create("activated");
     public DamageSource damageSource = new DamageSource("jaw");
 
@@ -91,8 +91,9 @@ public class SculkJawBlock extends Block implements PolymerBlock {
         pBuilder.add(ACTIVATED);
     }
 
+    public Block fake = Blocks.SCULK;
     @Override
     public Block getPolymerBlock(BlockState state) {
-        return Blocks.SCULK;
+        return fake;
     }
 }

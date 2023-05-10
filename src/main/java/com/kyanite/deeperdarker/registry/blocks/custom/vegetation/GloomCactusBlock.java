@@ -1,7 +1,7 @@
 package com.kyanite.deeperdarker.registry.blocks.custom.vegetation;
 
 import com.kyanite.deeperdarker.registry.blocks.DDBlocks;
-import eu.pb4.polymer.api.block.PolymerBlock;
+import com.kyanite.deeperdarker.registry.blocks.extentions.IFakeableBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelReader;
@@ -12,7 +12,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class GloomCactusBlock extends CactusBlock implements PolymerBlock {
+public class GloomCactusBlock extends CactusBlock implements IFakeableBlock {
     protected static final VoxelShape COLLISION_SHAPE = Block.box(1, 0, 1, 15, 13, 15);
     protected static final VoxelShape OUTLINE_SHAPE = Block.box(1, 0, 1, 15, 14, 15);
 
@@ -36,8 +36,9 @@ public class GloomCactusBlock extends CactusBlock implements PolymerBlock {
         return OUTLINE_SHAPE;
     }
 
+    public Block fake = Blocks.CACTUS;
     @Override
     public Block getPolymerBlock(BlockState state) {
-        return Blocks.CACTUS;
+        return fake;
     }
 }

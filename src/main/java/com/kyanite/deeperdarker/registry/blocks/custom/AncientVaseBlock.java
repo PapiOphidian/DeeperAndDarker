@@ -1,9 +1,9 @@
 package com.kyanite.deeperdarker.registry.blocks.custom;
 
+import com.kyanite.deeperdarker.registry.blocks.extentions.IFakeableBlock;
 import com.kyanite.deeperdarker.registry.entities.DDEntities;
 import com.kyanite.deeperdarker.registry.entities.custom.SculkLeechEntity;
 import com.kyanite.deeperdarker.registry.entities.custom.StalkerEntity;
-import eu.pb4.polymer.api.block.PolymerBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.ConstantInt;
@@ -28,7 +28,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import java.util.stream.Stream;
 
-public class AncientVaseBlock extends DropExperienceBlock implements SimpleWaterloggedBlock, PolymerBlock {
+public class AncientVaseBlock extends DropExperienceBlock implements SimpleWaterloggedBlock, IFakeableBlock {
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public final RandomSource randomSource = RandomSource.create();
 
@@ -76,8 +76,9 @@ public class AncientVaseBlock extends DropExperienceBlock implements SimpleWater
         }
     }
 
+    public Block fake = Blocks.FLOWER_POT;
     @Override
     public Block getPolymerBlock(BlockState state) {
-        return Blocks.FLOWER_POT;
+        return fake;
     }
 }

@@ -1,7 +1,7 @@
 package com.kyanite.deeperdarker.registry.blocks.custom.vegetation;
 
 import com.kyanite.deeperdarker.registry.blocks.DDBlocks;
-import eu.pb4.polymer.api.block.PolymerBlock;
+import com.kyanite.deeperdarker.registry.blocks.extentions.IFakeableBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelReader;
@@ -13,7 +13,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 // Todo, add shearable support.
-public class GloomGrassBlock extends BushBlock implements PolymerBlock {
+public class GloomGrassBlock extends BushBlock implements IFakeableBlock {
     protected static final VoxelShape SHAPE = Block.box(1, 0, 1, 14, 12, 14);
 
     public GloomGrassBlock(Properties pProperties) {
@@ -36,8 +36,9 @@ public class GloomGrassBlock extends BushBlock implements PolymerBlock {
         return state.is(DDBlocks.GLOOM_SCULK.get());
     }
 
+    public Block fake = Blocks.GRASS;
     @Override
     public Block getPolymerBlock(BlockState state) {
-        return Blocks.GRASS;
+        return fake;
     }
 }
