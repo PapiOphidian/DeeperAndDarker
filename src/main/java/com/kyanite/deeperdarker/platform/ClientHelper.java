@@ -12,8 +12,8 @@ import net.minecraft.world.item.Rarity;
 import java.util.function.Supplier;
 
 public class ClientHelper {
-    public static <T extends Item> Supplier<T> createArmorItem(ArmorMaterial pMaterial, EquipmentSlot pSlot, Item.Properties pProperties) {
-        return () -> (T) new WardenArmorItem(pMaterial, pSlot, pProperties);
+    public static <T extends Item> Supplier<T> createArmorItem(ArmorMaterial pMaterial, EquipmentSlot pSlot, Item.Properties pProperties, Item fake, String name) {
+        return () -> (T) new WardenArmorItem(pMaterial, pSlot, pProperties, fake, name);
     }
 
     public static <T extends Item> Supplier<T> getElytraItem() {

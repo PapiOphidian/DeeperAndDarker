@@ -40,7 +40,7 @@ public class SculkTransmitterItem extends Item implements PolymerItem {
 
     @Override
     public Item getPolymerItem(ItemStack itemStack, @Nullable ServerPlayer player) {
-        return Items.FISHING_ROD;
+        return Items.STICK;
     }
 
     @Override

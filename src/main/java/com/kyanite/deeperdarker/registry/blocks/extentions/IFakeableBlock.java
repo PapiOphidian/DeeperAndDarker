@@ -9,6 +9,6 @@ public interface IFakeableBlock extends PolymerBlock {
 
     @Override
     default Block getPolymerBlock(BlockState state) {
-        return fake;
+        return this.fake;
     }
 }

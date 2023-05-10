@@ -36,7 +36,7 @@ public class DDBlocks {
 
     // Echo Wood
     public static final Supplier<Block> ECHO_PLANKS = registerBlock("echo_planks", true, () -> new BlockExtension(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS), Blocks.BIRCH_PLANKS));
-    public static final Supplier<RotatedPillarBlock> ECHO_LOG = registerBlock("echo_log", true, () -> log(MaterialColor.WOOD, MaterialColor.PODZOL, Blocks.BIRCH_LOG));
+    public static final Supplier<RotatedPillarBlock> ECHO_LOG = registerBlock("echo_log", true, () -> log(MaterialColor.WOOD, MaterialColor.PODZOL, Blocks.ACACIA_LOG));
     public static final Supplier<RotatedPillarBlock> STRIPPED_ECHO_LOG = registerBlock("stripped_echo_log", true, () -> log(MaterialColor.WOOD, MaterialColor.PODZOL, Blocks.STRIPPED_BIRCH_LOG));
     public static final Supplier<RotatedPillarBlock> STRIPPED_ECHO_WOOD = registerBlock("stripped_echo_wood", true, () -> log(MaterialColor.WOOD, MaterialColor.PODZOL, Blocks.STRIPPED_BIRCH_WOOD));
     public static final Supplier<RotatedPillarBlock> ECHO_WOOD = registerBlock("echo_wood", true, () -> log(MaterialColor.WOOD, MaterialColor.PODZOL, Blocks.BIRCH_WOOD));
